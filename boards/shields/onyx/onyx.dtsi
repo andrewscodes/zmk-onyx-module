@@ -68,12 +68,11 @@ RC(3,0) RC(3,1) RC(3,2) RC(3,3) RC(3,4) RC(3,5) RC(4,5) RC(4,6) RC(3,6) RC(3,7) 
 
     chosen {
         zmk,physical-layout = &physical_layout0;
-        zephyr,display = &oled;
-        // Other chosen items
+        zmk.oled = &oled;                
     };
 };
 
-&pro_micro_i2c {
+&i2c0 {
     status = "okay";
 
     oled: ssd1306@3c {
@@ -91,4 +90,5 @@ RC(3,0) RC(3,1) RC(3,2) RC(3,3) RC(3,4) RC(3,5) RC(4,5) RC(4,6) RC(3,6) RC(3,7) 
         inversion-on;
         prechargep = <0x22>;
     };
+
 };
