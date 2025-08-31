@@ -1,4 +1,6 @@
 #include "onyx.dtsi"
+#include "onyx-pinctrl.dtsi"
+
 
 &kscan0 {
     col-gpios
