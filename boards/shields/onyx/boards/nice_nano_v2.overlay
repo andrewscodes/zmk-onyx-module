@@ -32,16 +32,14 @@
     };
 };
 
-// &i2c0 {
-//     compatible = "nordic,nrf-twim"; // I2C controller instead of generic
-//     status = "okay";
-//     pinctrl-0 = <&i2c0_default>;
-//     pinctrl-1 = <&i2c0_sleep>;
-//     pinctrl-names = "default", "sleep";
-//     clock-frequency = <I2C_BITRATE_FAST>;
-
-//     /* Nodes using the bus go here */
-// };
+&i2c0 {
+    compatible = "nordic,nrf-twim"; // I2C controller instead of generic
+    status = "okay";
+    pinctrl-0 = <&i2c0_default>;
+    pinctrl-1 = <&i2c0_sleep>;
+    pinctrl-names = "default", "sleep";
+    clock-frequency = <I2C_BITRATE_FAST>;
+};
 
 &spi3 {
     compatible = "nordic,nrf-spim";
