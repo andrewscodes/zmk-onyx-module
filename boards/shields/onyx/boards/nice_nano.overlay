@@ -4,9 +4,9 @@
 
     spi0_default: spi0_default {
         group1 {
-            psels = <NRF_PSEL(SPIM_SCK, 0, 20)>,   // SCK  (P0.20)
-                    <NRF_PSEL(SPIM_MOSI, 0, 17)>,  // MOSI (P0.17)
-                    <NRF_PSEL(SPIM_MISO, 0, 25)>;  // MISO (not used by nice!view, but must be defined)
+            psels = <NRF_PSEL(SPIM_SCK, 0, 20)>,
+                <NRF_PSEL(SPIM_MOSI, 0, 17)>,
+                <NRF_PSEL(SPIM_MISO, 0, 25)>;
         };
     };
     spi0_sleep: spi0_sleep {
@@ -64,6 +64,10 @@ nice_view_spi: &spi0 {
     pinctrl-names = "default", "sleep";
     clock-frequency = <I2C_BITRATE_FAST>; 
  };
+
+&pro_micro_i2c {
+    status = "disabled";
+};
 
 &spi3 {
     compatible = "nordic,nrf-spim";
