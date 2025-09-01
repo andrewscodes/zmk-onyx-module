@@ -28,6 +28,8 @@ nice_view_spi: &spi0 {
     status = "disabled";
 };
 
+/delete-node/ &oled;
+
 / {
     chosen {
         zephyr,display = &nice_view;
