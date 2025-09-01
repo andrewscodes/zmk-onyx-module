@@ -10,8 +10,64 @@
 #define ADJUST 3
 
 / {
+    behaviors {
+        fast_encoder: fast_encoder {
+            compatible = "zmk,behavior-sensor-rotate";
+            #sensor-binding-cells = <0>;
+            bindings = <&macro_fast_vol_dn>, <&macro_fast_vol_up>;
+        };        
+
+        rgb_encoder_bri: rgb_encoder_bri {
+            compatible = "zmk,behavior-sensor-rotate";
+            #sensor-binding-cells = <0>;
+            bindings = <&rgb_ug RGB_BRD>, <&rgb_ug RGB_BRI>;
+        };
+
+        rgb_encoder_hu: rgb_encoder_hu {
+            compatible = "zmk,behavior-sensor-rotate";
+            #sensor-binding-cells = <0>;
+            bindings = <&rgb_ug RGB_HUD>, <&rgb_ug RGB_HUI>;
+        };
+
+        rgb_encoder_sa: rgb_encoder_sa {
+            compatible = "zmk,behavior-sensor-rotate";
+            #sensor-binding-cells = <0>;
+            bindings = <&rgb_ug RGB_SAD>, <&rgb_ug RGB_SAI>;
+        };
+    };
+
+    macros {      
+              
+            macro_fast_vol_up: macro_fast_vol_up {
+                compatible = "zmk,behavior-macro";
+                #binding-cells = <0>;
+                wait-ms = <0>;
+                tap-ms = <0>;
+                bindings = <&kp C_VOL_UP &kp C_VOL_UP>;
+            };
+
+            macro_fast_vol_dn: macro_fast_vol_dn {
+                compatible = "zmk,behavior-macro";
+                #binding-cells = <0>;
+                wait-ms = <0>;
+                tap-ms = <0>;
+                bindings = <&kp C_VOL_DN &kp C_VOL_DN>;
+            };
+
+            NTIL: NTIL {
+                compatible = "zmk,behavior-macro";
+                #binding-cells = <0>;
+                bindings
+                    = <&macro_press &kp LALT>
+                    , <&macro_tap &kp KP_N1 &kp KP_N6 &kp KP_N4>
+                    , <&macro_release &kp LALT>
+                    ;
+            };
+    };
     
-    //Activate ADJUST layer by pressing raise and lower
+
+
+   //Activate ADJUST layer by pressing raise and lower
     conditional_layers {
         compatible = "zmk,conditional-layers";
         adjust_layer {
@@ -24,31 +80,31 @@
         compatible = "zmk,keymap";
 
         default_layer {
-            display-name = "default";
+            display-name = "BASE";
 // ╭─────────────┬─────────────┬─────────────┬─────────────┬─────────────┬─────────────╮                               ╭─────────────┬─────────────┬─────────────┬─────────────┬─────────────┬─────────────╮
 // |     ESC     |      1      |      2      |      3      |      4      |      5      |                               |      6      |      7      |      8      |      9      |      0      |     EQUAL   |
 // ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤                               ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤
 // |     TAB     |      Q      |      W      |      E      |      R      |      T      |                               |      Y      |      U      |      I      |      O      |      P      |      '      |
 // ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤                               ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤
 // |     SHIFT   |      A      |      S      |      D      |      F      |      G      |                               |      H      |      J      |      K      |      L      |      ;      |     BSPC    |
-// ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────┬─────────────╮    ╭────────────┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤
+// ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────╮    ╭────────────┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤
 // |     CTRL    |      Z      |      X      |      C      |      V      |      B      |     MUTE    |    |     RGB    |      N      |      M      |      ,      |      .      |      /      |     DEL     |
-// ╰─────────────┴─────────────┴─────────────┼─────────────┼─────────────┼─────────────├─────────────┤    ├────────────┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────┴─────────────╯
+// ╰─────────────┴─────────────┼─────────────┼─────────────┼─────────────┼─────────────├─────────────┤    ├────────────┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────┴─────────────╯
 //                             |     GUI     |     ALT     |     CAPS    |     LOWER   |    ENTER    |    |   SPACE    |    RAISE    |    HOME     |     END     |     GUI     |
 //                             ╰─────────────┴─────────────┴─────────────┴─────────────┴─────────────╯    ╰────────────┴─────────────┴─────────────┴─────────────┴─────────────╯
-            bindings = <
-&kp ESC   &kp N1 &kp N2   &kp N3   &kp N4    &kp N5                                  &kp N6     &kp N7    &kp N8    &kp N9   &kp N0   &kp EQUAL
-&kp TAB   &kp Q  &kp W    &kp E    &kp R     &kp T                                   &kp Y      &kp U     &kp I     &kp O    &kp P    &kp SQT
-&kp LSHFT &kp A  &kp S    &kp D    &kp F     &kp G                                   &kp H      &kp J     &kp K     &kp L    &kp SEMI &kp BSPC
-&kp LCTRL &kp Z  &kp X    &kp C    &kp V     &kp B      &kp C_MUTE &rgb_ug RGB_TOG   &kp N      &kp M     &kp COMMA &kp DOT  &kp FSLH &kp DEL
-                &kp LGUI &kp LALT &kp CAPS  &mo LOWER  &kp RET    &kp SPACE         &mo RAISE  &kp HOME  &kp END   &kp RGUI
-            >;   
+                        bindings = <
+            &kp ESC   &kp N1 &kp N2   &kp N3   &kp N4    &kp N5                                  &kp N6     &kp N7    &kp N8    &kp N9   &kp N0   &kp EQUAL
+            &kp TAB   &kp Q  &kp W    &kp E    &kp R     &kp T                                   &kp Y      &kp U     &kp I     &kp O    &kp P    &kp SQT
+            &kp LSHFT &kp A  &kp S    &kp D    &kp F     &kp G                                   &kp H      &kp J     &kp K     &kp L    &kp SEMI &kp BSPC
+            &kp LCTRL &kp Z  &kp X    &kp C    &kp V     &kp B      &kp C_MUTE &rgb_ug RGB_TOG   &kp N      &kp M     &kp COMMA &kp DOT  &kp FSLH &kp DEL
+                            &kp LGUI &kp LALT &kp CAPS  &mo LOWER  &kp RET    &kp SPACE         &mo RAISE  &kp HOME  &kp END   &kp RGUI
+                        >;
 
-            sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN &inc_dec_kp PG_UP PG_DN>;                 
-        };
+                        sensor-bindings = <&fast_encoder &rgb_encoder_bri>;
+                    };
 
         lower_layer {
-            display-name = "lower";
+            display-name = "LOWER";
 
 // ╭─────────────┬─────────────┬─────────────┬─────────────┬─────────────┬─────────────╮                               ╭─────────────┬─────────────┬─────────────┬─────────────┬─────────────┬─────────────╮
 // |     F12     |      F1     |      F2     |     F3      |      F4     |      F5     |                               |      F6     |      F7     |      F8     |      F9     |      F10    |     F11     |
@@ -56,23 +112,24 @@
 // |             |             |      (      |      )      |      [      |      ]      |                               |      +      |      7      |      8      |      9      |             |             |
 // ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤                               ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤
 // |             |             |      &      |      |      |      {      |      }      |                               |      -      |      4      |      5      |      6      |      ñ      |             |
-// ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────┬─────────────╮    ╭────────────┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤
+// ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────╮    ╭────────────┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤
 // |             |             |      /      |      \      |      <      |      >      |             |    |            |      _      |      1      |      2      |      3      |      \      |             |
-// ╰─────────────┴─────────────┴─────────────┼─────────────┼─────────────┼─────────────├─────────────┤    ├────────────┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────┴─────────────╯
+// ╰─────────────┴─────────────┼─────────────┼─────────────┼─────────────┼─────────────├─────────────┤    ├────────────┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────┴─────────────╯
 //                             |             |             |             |             |             |    |     =      |             |             |      0      |             |
 //                             ╰─────────────┴─────────────┴─────────────┴─────────────┴─────────────╯    ╰────────────┴─────────────┴─────────────┴─────────────┴─────────────╯
-            bindings = <
-&kp F12   &kp F1    &kp F2    &kp F3    &kp F4    &kp F5                     &kp F6    &kp F7       &kp F8       &kp F9       &kp F10    &kp F11
-&trans    &trans    &kp LPAR  &kp RPAR  &kp LBKT  &kp RBKT                   &kp PLUS  &kp KP_N7    &kp KP_N8    &kp KP_N9    &trans     &trans
-&trans    &trans    &kp AMPS  &kp PIPE  &kp LBRC  &kp RBRC                   &kp MINUS &kp KP_N4    &kp KP_N5    &kp KP_N6    &trans     &trans
-&trans    &trans    &kp FSLH  &kp BSLH  &kp LT    &kp GT    &trans &trans    &kp UNDER &kp KP_N1    &kp KP_N2    &kp KP_N3    &kp BSLH   &trans
-                    &trans    &trans    &trans    &trans    &trans &kp EQUAL &trans    &trans    &kp KP_N0    &trans
-            >;
-            sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN &inc_dec_kp PG_UP PG_DN>;
-        };
+                        bindings = <
+            &kp F12   &kp F1    &kp F2    &kp F3    &kp F4    &kp F5                     &kp F6    &kp F7       &kp F8       &kp F9       &kp F10    &kp F11
+            &trans    &trans    &kp LPAR  &kp RPAR  &kp LBKT  &kp RBKT                   &kp PLUS  &kp KP_N7    &kp KP_N8    &kp KP_N9    &trans     &trans
+            &trans    &trans    &kp AMPS  &kp PIPE  &kp LBRC  &kp RBRC                   &kp MINUS &kp KP_N4    &kp KP_N5    &kp KP_N6    &NTIL      &trans
+            &trans    &trans    &kp FSLH  &kp BSLH  &kp LT    &kp GT    &trans &trans    &kp UNDER &kp KP_N1    &kp KP_N2    &kp KP_N3    &kp BSLH   &trans
+                                &trans    &trans    &trans    &trans    &trans &kp EQUAL &trans    &trans    &kp KP_N0    &trans
+                        >;
+
+                        sensor-bindings = <&fast_encoder &rgb_encoder_hu>;
+                    };
 
         raise_layer {
-            display-name = "raise";
+            display-name = "RAISE";
 
 // ╭─────────────┬─────────────┬─────────────┬─────────────┬─────────────┬─────────────╮                               ╭─────────────┬─────────────┬─────────────┬─────────────┬─────────────┬─────────────╮
 // |    BTCLR    |     BT1     |     BT2     |     BT3     |     BT4     |     BT5     |                               |             |             |             |             |             |             |
@@ -80,23 +137,23 @@
 // |             |             |             |             |      !      |      @      |                               |             |             |      ^      |             |             |             |
 // ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤                               ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤
 // |             |             |             |             |      #      |      $      |                               |             |      <-     |      v      |     ->      |             |             |
-// ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────┬─────────────╮    ╭────────────┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤
-// |             |             |             |             |      %      |      *      |   RGB_EFF   |    |            |             |             |             |             |             |             |
-// ╰─────────────┴─────────────┴─────────────┼─────────────┼─────────────┼─────────────├─────────────┤    ├────────────┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────┴─────────────╯
+// ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────╮    ╭────────────┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤
+// |             |             |             |             |      %      |      *      |             |    |  RGB_EFF   |             |             |             |             |             |             |
+// ╰─────────────┴─────────────┼─────────────┼─────────────┼─────────────┼─────────────├─────────────┤    ├────────────┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────┴─────────────╯
 //                             |             |             |             |             |             |    |            |             |             |             |             |
 //                             ╰─────────────┴─────────────┴─────────────┴─────────────┴─────────────╯    ╰────────────┴─────────────┴─────────────┴─────────────┴─────────────╯
-            bindings = <
-&bt BT_CLR &bt BT_SEL 0 &bt BT_SEL 1 &bt BT_SEL 2 &bt BT_SEL 3 &bt BT_SEL 4                          &trans &trans   &trans   &trans    &trans  &trans
-&trans     &trans       &kp UP       &trans       &kp EXCL     &kp AT                                &trans &trans   &kp UP   &trans    &trans  &trans
-&trans     &kp LEFT     &kp DOWN     &kp RIGHT    &kp HASH     &kp DLLR                              &trans &kp LEFT &kp DOWN &kp RIGHT &trans  &trans
-&trans     &trans       &trans       &trans       &kp PRCNT    &kp ASTRK   &rgb_ug RGB_EFF   &trans  &trans &trans   &trans   &trans    &trans  &trans
-                        &trans       &trans       &trans       &trans      &trans            &trans  &trans &trans   &trans   &trans  
-            >; 
-            sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN &inc_dec_kp PG_UP PG_DN>;     
-        };
+                        bindings = <
+            &bt BT_CLR &bt BT_SEL 0 &bt BT_SEL 1 &bt BT_SEL 2 &bt BT_SEL 3 &bt BT_SEL 4                          &trans &trans   &trans   &trans    &trans  &trans
+            &trans     &trans       &kp UP       &trans       &kp EXCL     &kp AT                                &trans &trans   &kp UP   &trans    &trans  &trans
+            &trans     &kp LEFT     &kp DOWN     &kp RIGHT    &kp HASH     &kp DLLR                              &trans &kp LEFT &kp DOWN &kp RIGHT &trans  &trans
+            &trans     &trans       &trans       &trans       &kp PRCNT    &kp ASTRK   &trans   &rgb_ug RGB_EFF  &trans &trans   &trans   &trans    &trans  &trans
+                                    &trans       &trans       &trans       &trans      &trans            &trans  &trans &trans   &trans   &trans  
+                        >;
+
+                        sensor-bindings = <&inc_dec_kp PG_UP PG_DN &rgb_encoder_sa>;
+                    };
 
         adjust_layer {
-            display-name = "adjust";
 // ╭─────────────┬─────────────┬─────────────┬─────────────┬─────────────┬─────────────╮                               ╭─────────────┬─────────────┬─────────────┬─────────────┬─────────────┬─────────────╮
 // |             |  EP Toggle  |    EP On    |    EP Off   |  Bootloader |    Reset    |                               |    Reset    |  Bootloader |             |             |             |             |
 // ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤                               ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤
@@ -105,17 +162,18 @@
 // |             |             |             |             |             |             |                               |             |             |             |             |             |             |
 // ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────┬─────────────╮    ╭────────────┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤
 // |             |             |             |             |             |             |             |    |            |             |             |             |             |             |             |
-// ╰─────────────┴─────────────┴─────────────┼─────────────┼─────────────┼─────────────├─────────────┤    ├────────────┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────┴─────────────╯
+// ╰─────────────┴─────────────┼─────────────┼─────────────┼─────────────┼─────────────├─────────────┤    ├────────────┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────┴─────────────╯
 //                             |             |             |             |             |             |    |            |             |             |             |             |
 //                             ╰─────────────┴─────────────┴─────────────┴─────────────┴─────────────╯    ╰────────────┴─────────────┴─────────────┴─────────────┴─────────────╯
-            
-            bindings = <
-&none  &ext_power EP_TOG  &ext_power EP_ON  &ext_power EP_OFF  &bootloader  &sys_reset              &sys_reset   &bootloader   &none  &none  &none  &none  
-&none  &none  &none  &none  &none        &none                                                      &none        &none  &none  &none  &none  &none  
-&none  &none  &none  &none  &none        &none                                                      &none        &none  &none  &none  &none  &none
-&none  &none  &none  &none  &none        &none      &none                                   &none   &none        &none  &none  &none  &none  &none
-                &none  &none  &none        &none      &none                                   &none   &none        &none  &none  &none 
-            >;
+
+                        display-name = "ADJUST";
+                        bindings = <
+            &none  &ext_power EP_TOG  &ext_power EP_ON  &ext_power EP_OFF  &bootloader  &sys_reset              &sys_reset   &bootloader   &none  &none  &none  &none  
+            &none  &none  &none  &none  &none        &none                                                      &none        &none  &none  &none  &none  &none  
+            &none  &none  &none  &none  &none        &none                                                      &none        &none  &none  &none  &none  &none
+            &none  &none  &none  &none  &none        &none      &none                                   &none   &none        &none  &none  &none  &none  &none
+                          &none  &none  &none        &none      &none                                   &none   &none        &none  &none  &none 
+                        >;
         };
     };
 };

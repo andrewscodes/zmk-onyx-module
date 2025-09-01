@@ -19,7 +19,7 @@
 #
 ---
 
-# # No OLED
+# No OLED
 # include:
 #   - board: nice_nano_v2
 #     shield: onyx_left
