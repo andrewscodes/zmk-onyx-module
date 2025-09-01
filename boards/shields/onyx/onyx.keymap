@@ -9,10 +9,6 @@
 #define RAISE 2
 #define ADJUST 3
 
-//  &nice_view_spi {
-//         cs-gpios = <&pro_micro 19 GPIO_ACTIVE_HIGH>;  // use D19 (P0.02) for CS niceview
-//     };
-
 / {
     
     //Activate ADJUST layer by pressing raise and lower
