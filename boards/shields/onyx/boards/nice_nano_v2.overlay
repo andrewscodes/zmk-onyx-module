@@ -19,20 +19,20 @@
     };
     
     // OLED display pin control
-    i2c0_default: i2c0_default {
-        group1 {
-            psels = <NRF_PSEL(TWIM_SDA, 0, 31)>, //D21
-                <NRF_PSEL(TWIM_SCL, 0, 29)>; //D20
-        };
-    };
+    // i2c0_default: i2c0_default {
+    //     group1 {
+    //         psels = <NRF_PSEL(TWIM_SDA, 0, 31)>, //D21
+    //             <NRF_PSEL(TWIM_SCL, 0, 29)>; //D20
+    //     };
+    // };
 
-    i2c0_sleep: i2c0_sleep {
-        group1 {
-            psels = <NRF_PSEL(TWIM_SDA, 0, 31)>,
-                <NRF_PSEL(TWIM_SCL, 0, 29)>;
-            low-power-enable;
-        };
-    };
+    // i2c0_sleep: i2c0_sleep {
+    //     group1 {
+    //         psels = <NRF_PSEL(TWIM_SDA, 0, 31)>,
+    //             <NRF_PSEL(TWIM_SCL, 0, 29)>;
+    //         low-power-enable;
+    //     };
+    // };
 
     spi3_default: spi3_default {
         group1 {
@@ -56,14 +56,14 @@ nice_view_spi: &spi0 {
     cs-gpios = <&pro_micro 19 GPIO_ACTIVE_LOW>; // CS (P0.02/D19)
 };
 
-&i2c0 {
-    compatible = "nordic,nrf-twi";
-    status = "okay";
-    pinctrl-0 = <&i2c0_default>;
-    pinctrl-1 = <&i2c0_sleep>;
-    pinctrl-names = "default", "sleep";
-    clock-frequency = <I2C_BITRATE_FAST>; 
- };
+// &i2c0 {
+//     compatible = "nordic,nrf-twi";
+//     status = "okay";
+//     pinctrl-0 = <&i2c0_default>;
+//     pinctrl-1 = <&i2c0_sleep>;
+//     pinctrl-names = "default", "sleep";
+//     clock-frequency = <I2C_BITRATE_FAST>; 
+//  };
 
 &pro_micro_i2c {
     status = "disabled";
