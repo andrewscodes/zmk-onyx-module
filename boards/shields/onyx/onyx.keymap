@@ -144,8 +144,8 @@
 //                             ╰─────────────┴─────────────┴─────────────┴─────────────┴─────────────╯    ╰────────────┴─────────────┴─────────────┴─────────────┴─────────────╯
                         bindings = <
             &bt BT_CLR &bt BT_SEL 0 &bt BT_SEL 1 &bt BT_SEL 2 &bt BT_SEL 3 &bt BT_SEL 4                          &trans &trans   &trans   &trans    &trans  &trans
-            &trans     &trans       &kp UP       &trans       &kp EXCL     &kp AT                                &trans &trans   &kp UP   &trans    &trans  &trans
-            &trans     &kp LEFT     &kp DOWN     &kp RIGHT    &kp HASH     &kp DLLR                              &trans &kp LEFT &kp DOWN &kp RIGHT &trans  &trans
+            &trans     &trans       &trans       &trans       &kp EXCL     &kp AT                                &trans &trans   &kp UP   &trans    &trans  &trans
+            &trans     &trans       &trans       &trans       &kp HASH     &kp DLLR                              &trans &kp LEFT &kp DOWN &kp RIGHT &trans  &trans
             &trans     &trans       &trans       &trans       &kp PRCNT    &kp ASTRK   &trans   &rgb_ug RGB_EFF  &trans &trans   &trans   &trans    &trans  &trans
                                     &trans       &trans       &trans       &trans      &trans            &trans  &trans &trans   &trans   &trans  
                         >;
