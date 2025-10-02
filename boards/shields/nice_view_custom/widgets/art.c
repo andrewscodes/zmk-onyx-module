@@ -228,10 +228,9 @@ const lv_img_dsc_t mountain = {
     .data = mountain_map,
 };
 
-#ifndef LV_ATTRIBUTE_IMG_KITSUNEART
-#define LV_ATTRIBUTE_IMG_KITSUNEART
+#ifndef LV_ATTRIBUTE_IMG_KITSUNE
+#define LV_ATTRIBUTE_IMG_KITSUNE
 #endif
-
 
 const LV_ATTRIBUTE_MEM_ALIGN LV_ATTRIBUTE_LARGE_CONST LV_ATTRIBUTE_IMG_KITSUNE uint8_t kitsune_map[] = {
 #if CONFIG_NICE_VIEW_WIDGET_INVERTED
