@@ -51,7 +51,7 @@ static void draw_top(lv_obj_t *widget, lv_color_t cbuf[], const struct status_st
 
     lv_draw_label_dsc_t label_dsc;
     init_label_dsc(&label_dsc, LVGL_FOREGROUND, &lv_font_montserrat_16, LV_TEXT_ALIGN_RIGHT);
-    #if IS_ENABLED(CONFIG_ZMK_WPM)
+    #if IS_ENABLED(CONFIG_NICE_VIEW_WPM_WIDGET)
         lv_draw_label_dsc_t label_dsc_wpm;
         init_label_dsc(&label_dsc_wpm, LVGL_FOREGROUND, &lv_font_unscii_8, LV_TEXT_ALIGN_RIGHT);
     #endif    
@@ -91,7 +91,7 @@ static void draw_top(lv_obj_t *widget, lv_color_t cbuf[], const struct status_st
     lv_canvas_draw_text(canvas, 0, 0, CANVAS_SIZE, &label_dsc, output_text);
 
     // Draw WPM
-    #if IS_ENABLED(CONFIG_ZMK_WPM)
+    #if IS_ENABLED(CONFIG_NICE_VIEW_WPM_WIDGET)
         lv_canvas_draw_rect(canvas, 0, 21, 68, 42, &rect_white_dsc);
         lv_canvas_draw_rect(canvas, 1, 22, 66, 40, &rect_black_dsc);
 
@@ -311,7 +311,7 @@ ZMK_DISPLAY_WIDGET_LISTENER(widget_layer_status, struct layer_status_state, laye
 
 ZMK_SUBSCRIPTION(widget_layer_status, zmk_layer_state_changed);
 
-#if IS_ENABLED(CONFIG_ZMK_WPM)
+#if IS_ENABLED(CONFIG_NICE_VIEW_WPM_WIDGET)
     static void set_wpm_status(struct zmk_widget_status *widget, struct wpm_status_state state) {
     for (int i = 0; i < 9; i++) {
         widget->state.wpm[i] = widget->state.wpm[i + 1];
@@ -353,7 +353,7 @@ int zmk_widget_status_init(struct zmk_widget_status *widget, lv_obj_t *parent) {
     widget_battery_status_init();
     widget_output_status_init();
     widget_layer_status_init();
-    #if IS_ENABLED(CONFIG_ZMK_WPM)
+    #if IS_ENABLED(CONFIG_NICE_VIEW_WPM_WIDGET)
         widget_wpm_status_init();
     #endif
     
