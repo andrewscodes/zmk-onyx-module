@@ -311,7 +311,7 @@ ZMK_DISPLAY_WIDGET_LISTENER(widget_layer_status, struct layer_status_state, laye
 
 ZMK_SUBSCRIPTION(widget_layer_status, zmk_layer_state_changed);
 
-#if IS_ENABLED(CONFIG_NICE_VIEW_WPM_WIDGET)
+
     static void set_wpm_status(struct zmk_widget_status *widget, struct wpm_status_state state) {
     for (int i = 0; i < 9; i++) {
         widget->state.wpm[i] = widget->state.wpm[i + 1];
@@ -330,6 +330,7 @@ ZMK_SUBSCRIPTION(widget_layer_status, zmk_layer_state_changed);
         return (struct wpm_status_state){.wpm = zmk_wpm_get_state()};
     };
 
+#if IS_ENABLED(CONFIG_NICE_VIEW_WPM_WIDGET)
     ZMK_DISPLAY_WIDGET_LISTENER(widget_wpm_status, struct wpm_status_state, wpm_status_update_cb,
                                 wpm_status_get_state)
     ZMK_SUBSCRIPTION(widget_wpm_status, zmk_wpm_state_changed);
