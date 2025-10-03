@@ -147,17 +147,10 @@ static void draw_middle(lv_obj_t *widget, lv_color_t cbuf[], const struct status
     // Fill background
     lv_canvas_draw_rect(canvas, 0, 0, CANVAS_SIZE, CANVAS_SIZE, &rect_black_dsc);
 
-    // Draw circles
-    #if IS_ENABLED(CONFIG_NICE_VIEW_WPM_WIDGET)
+    // Draw circles    
     int circle_offsets[NICEVIEW_PROFILE_COUNT][2] = {
         {13, 13}, {55, 13}, {34, 34}, {13, 55}, {55, 55},
     };
-    #else
-    int circle_offsets[NICEVIEW_PROFILE_COUNT][2] = {
-        {13, -23}, {55, -23}, {34, 4}, {13, -25}, {55, -25},
-    };
-    #endif
-    
 
     for (int i = 0; i < NICEVIEW_PROFILE_COUNT; i++) {
         bool selected = i == state->active_profile_index;
@@ -350,6 +343,10 @@ int zmk_widget_status_init(struct zmk_widget_status *widget, lv_obj_t *parent) {
     lv_obj_align(top, LV_ALIGN_TOP_RIGHT, 0, 0);
     lv_canvas_set_buffer(top, widget->cbuf, CANVAS_SIZE, CANVAS_SIZE, LV_IMG_CF_TRUE_COLOR);
     lv_obj_t *middle = lv_canvas_create(widget->obj);
+    lv_obj_align(middle, LV_ALIGN_TOP_LEFT, 24, 0);
+#if !IS_ENABLED(CONFIG_NICE_VIEW_WPM_WIDGET)
+    lv_obj_align(middle, LV_ALIGN_TOP_LEFT, 54, 0);
+#else
     lv_obj_align(middle, LV_ALIGN_TOP_LEFT, 24, 0);
     lv_canvas_set_buffer(middle, widget->cbuf2, CANVAS_SIZE, CANVAS_SIZE, LV_IMG_CF_TRUE_COLOR);
     lv_obj_t *bottom = lv_canvas_create(widget->obj);
