@@ -51,7 +51,7 @@ static void draw_top(lv_obj_t *widget, lv_color_t cbuf[], const struct status_st
 
     lv_draw_label_dsc_t label_dsc;
     init_label_dsc(&label_dsc, LVGL_FOREGROUND, &lv_font_montserrat_16, LV_TEXT_ALIGN_RIGHT);
-    #if IS_ENABLED(CONFIG_ZMK_WIDGET_WPM_STATUS)
+    #if IS_ENABLED(CONFIG_NICE_VIEW_WPM_WIDGET)
         lv_draw_label_dsc_t label_dsc_wpm;
         init_label_dsc(&label_dsc_wpm, LVGL_FOREGROUND, &lv_font_unscii_8, LV_TEXT_ALIGN_RIGHT);
     #endif    
@@ -91,7 +91,7 @@ static void draw_top(lv_obj_t *widget, lv_color_t cbuf[], const struct status_st
     lv_canvas_draw_text(canvas, 0, 0, CANVAS_SIZE, &label_dsc, output_text);
 
     // Draw WPM
-    #if IS_ENABLED(CONFIG_ZMK_WIDGET_WPM_STATUS)
+    #if IS_ENABLED(CONFIG_NICE_VIEW_WPM_WIDGET)
         lv_canvas_draw_rect(canvas, 0, 21, 68, 42, &rect_white_dsc);
         lv_canvas_draw_rect(canvas, 1, 22, 66, 40, &rect_black_dsc);
 
@@ -330,7 +330,7 @@ ZMK_SUBSCRIPTION(widget_layer_status, zmk_layer_state_changed);
         return (struct wpm_status_state){.wpm = zmk_wpm_get_state()};
     };
 
-#if IS_ENABLED(CONFIG_ZMK_WIDGET_WPM_STATUS)
+#if IS_ENABLED(CONFIG_NICE_VIEW_WPM_WIDGET)
     ZMK_DISPLAY_WIDGET_LISTENER(widget_wpm_status, struct wpm_status_state, wpm_status_update_cb,
                                 wpm_status_get_state)
     ZMK_SUBSCRIPTION(widget_wpm_status, zmk_wpm_state_changed);
@@ -344,7 +344,7 @@ int zmk_widget_status_init(struct zmk_widget_status *widget, lv_obj_t *parent) {
     lv_obj_align(top, LV_ALIGN_TOP_RIGHT, 0, 0);
     lv_canvas_set_buffer(top, widget->cbuf, CANVAS_SIZE, CANVAS_SIZE, LV_IMG_CF_TRUE_COLOR);
     lv_obj_t *middle = lv_canvas_create(widget->obj);    
-#if IS_ENABLED(CONFIG_ZMK_WIDGET_WPM_STATUS)
+#if IS_ENABLED(CONFIG_NICE_VIEW_WPM_WIDGET)
     lv_obj_align(middle, LV_ALIGN_TOP_LEFT, 24, 0);
 #else
     lv_obj_align(middle, LV_ALIGN_TOP_LEFT, 40, 0);
@@ -358,7 +358,7 @@ int zmk_widget_status_init(struct zmk_widget_status *widget, lv_obj_t *parent) {
     widget_battery_status_init();
     widget_output_status_init();
     widget_layer_status_init();
-#if IS_ENABLED(CONFIG_ZMK_WIDGET_WPM_STATUS)
+#if IS_ENABLED(CONFIG_NICE_VIEW_WPM_WIDGET)
     widget_wpm_status_init();
 #endif
 
