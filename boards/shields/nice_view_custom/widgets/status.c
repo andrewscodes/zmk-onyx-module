@@ -154,7 +154,7 @@ static void draw_middle(lv_obj_t *widget, lv_color_t cbuf[], const struct status
     };
     #else
     int circle_offsets[NICEVIEW_PROFILE_COUNT][2] = {
-        {33, 13}, {75, 13}, {54, 34}, {33, 55}, {75, 55},
+        {13, 43}, {55, 43}, {34, 64}, {13, 85}, {55, 85},
     };
     #endif
     
