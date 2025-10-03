@@ -148,9 +148,16 @@ static void draw_middle(lv_obj_t *widget, lv_color_t cbuf[], const struct status
     lv_canvas_draw_rect(canvas, 0, 0, CANVAS_SIZE, CANVAS_SIZE, &rect_black_dsc);
 
     // Draw circles
+    #if IS_ENABLED(CONFIG_NICE_VIEW_WPM_WIDGET)
     int circle_offsets[NICEVIEW_PROFILE_COUNT][2] = {
         {13, 13}, {55, 13}, {34, 34}, {13, 55}, {55, 55},
     };
+    #else
+    int circle_offsets[NICEVIEW_PROFILE_COUNT][2] = {
+        {33, 13}, {75, 13}, {54, 34}, {33, 55}, {75, 55},
+    };
+    #endif
+    
 
     for (int i = 0; i < NICEVIEW_PROFILE_COUNT; i++) {
         bool selected = i == state->active_profile_index;
@@ -353,10 +360,9 @@ int zmk_widget_status_init(struct zmk_widget_status *widget, lv_obj_t *parent) {
     widget_battery_status_init();
     widget_output_status_init();
     widget_layer_status_init();
-    #if IS_ENABLED(CONFIG_NICE_VIEW_WPM_WIDGET)
-        widget_wpm_status_init();
-    #endif
-    
+#if IS_ENABLED(CONFIG_NICE_VIEW_WPM_WIDGET)
+    widget_wpm_status_init();
+#endif
 
     return 0;
 }
