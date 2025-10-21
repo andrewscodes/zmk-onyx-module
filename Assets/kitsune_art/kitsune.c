@@ -17,11 +17,11 @@
 #define LV_ATTRIBUTE_MEM_ALIGN
 #endif
 
-#ifndef LV_ATTRIBUTE_IMG_DESCARGA (10)
-#define LV_ATTRIBUTE_IMG_DESCARGA (10)
+#ifndef LV_ATTRIBUTE_IMG_KITSUNE (10)
+#define LV_ATTRIBUTE_IMG_KITSUNE (10)
 #endif
 
-const LV_ATTRIBUTE_MEM_ALIGN LV_ATTRIBUTE_LARGE_CONST LV_ATTRIBUTE_IMG_DESCARGA (10) uint8_t descarga (10)_map[] = {
+const LV_ATTRIBUTE_MEM_ALIGN LV_ATTRIBUTE_LARGE_CONST LV_ATTRIBUTE_IMG_KITSUNE (10) uint8_t kitsune (10)_map[] = {
   0xff, 0xff, 0xff, 0xff, 	/*Color of index 0*/
   0x00, 0x00, 0x00, 0xff, 	/*Color of index 1*/
 
@@ -95,12 +95,12 @@ const LV_ATTRIBUTE_MEM_ALIGN LV_ATTRIBUTE_LARGE_CONST LV_ATTRIBUTE_IMG_DESCARGA 
   0xff, 0xff, 0xff, 0xcf, 0x3c, 0x80, 0x00, 0x00, 0x07, 0xff, 0xff, 0xff, 0xff, 0xbf, 0xff, 0xf2, 0x0b, 0xf0, 
 };
 
-const lv_img_dsc_t descarga (10) = {
+const lv_img_dsc_t kitsune (10) = {
   .header.cf = LV_IMG_CF_INDEXED_1BIT,
   .header.always_zero = 0,
   .header.reserved = 0,
   .header.w = 140,
   .header.h = 68,
   .data_size = 1232,
-  .data = descarga (10)_map,
+  .data = kitsune (10)_map,
 };
