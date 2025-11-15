@@ -1,1 +1,2 @@
-![Onyx-layout](https://github.com/user-attachments/assets/c57fd4a3-2902-41a1-919b-07a6361b5afd)
+![Onyx-layout](https://github.com/user-attachments/assets/cecdb5c1-0b8d-4f9a-a639-99720e4d6b2f)
+
