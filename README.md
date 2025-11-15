@@ -1,2 +1,2 @@
-![Onyx-layout](.Assets/Onyx-layout.svg)
+![Onyx-layout](./Assets/Onyx-layout.svg)
 
